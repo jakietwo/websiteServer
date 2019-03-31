@@ -8,8 +8,9 @@ class User extends Service {
     return {user}
   }
   async list () {
-    console.log(this.ctx.model)
-    return this.ctx.model.User.findAll()
+    const ctx = this.ctx
+    console.log('model',ctx.model)
+    return ctx.model.User.findAll()
   }
 }
 module.exports = User

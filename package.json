@@ -11,8 +11,7 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^4.3.1",
-    "mysql2": "^1.6.5",
-    "sequelize-cli": "^5.4.0"
+    "mysql2": "^1.6.5"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -23,16 +23,24 @@ module.exports = appInfo => {
     dialect: 'mysql',
     host: '127.0.0.1',
     port: 3306,
-    database: 'mywebsite'
+    database: 'mywebsite',
+    username: 'root',
+    password: 'wjg19940802.',
+    timezone: '+08:00'
   }
 
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
   };
-
   return {
     ...config,
     ...userConfig,
+    
   };
 };
+// module.exports = {
+//   jsonp: {
+//     csrf: true
+//   }
+// }
