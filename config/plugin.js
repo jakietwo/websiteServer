@@ -19,11 +19,19 @@ exports.mysql = {
   },
   app: true,
   agent: false
-}
+};
 exports.sequelize = {
   enable: true,
   package: 'egg-sequelize',
 };
+exports.validate = {
+  enable: true,
+  package: 'egg-validate'
+}
+exports.jwt = {
+  enable: true,
+  package: 'egg-jwt'
+}
 // exports.security = {
 //   enable: false
 // }

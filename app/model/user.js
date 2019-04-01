@@ -8,7 +8,7 @@ module.exports = app => {
             primaryKey: true,
             autoIncrement: true,      
         },
-        username: STRING(45),
+        username: STRING(45), 
         password: STRING(255),
         auth: INTEGER,
         created_at: DATE,

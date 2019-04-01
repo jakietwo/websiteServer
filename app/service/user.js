@@ -12,5 +12,14 @@ class User extends Service {
     console.log('model',ctx.model)
     return ctx.model.User.findAll()
   }
+  async show (id) {
+    const ctx = this.ctx
+    return ctx.model.User.findOne(id)
+  }
+  async destory(id) {
+    const ctx = this.ctx
+    return ctx.model.User.delete(id)
+  }
+  
 }
 module.exports = User

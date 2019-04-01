@@ -7,5 +7,5 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
   // app.resources('users', '/users', app.controller.users);
-  router.get('/users/index', controller.users.index)
+  app.router.resources('users', '/api/v1/users', app.controller.v1.users)
 };

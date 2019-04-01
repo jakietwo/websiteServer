@@ -39,6 +39,9 @@ module.exports = appInfo => {
     
   };
 };
+exports.jwt = {
+  secret: "jakietwo"
+}
 // module.exports = {
 //   jsonp: {
 //     csrf: true
