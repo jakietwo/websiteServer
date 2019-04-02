@@ -28,7 +28,14 @@ module.exports = appInfo => {
     password: 'wjg19940802.',
     timezone: '+08:00'
   }
-
+  config.redis = {
+    client: {
+      port: 6379,
+      host: '127.0.0.1',
+      password: 'jakietwo',
+      db: 0
+    }
+  }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -36,11 +43,15 @@ module.exports = appInfo => {
   return {
     ...config,
     ...userConfig,
-    
+
   };
 };
 exports.jwt = {
   secret: "jakietwo"
+}
+exports.middleware = ['userInterceptor']
+exports.userInterceptor = {
+  exclude: ['login', 'signup']
 }
 // module.exports = {
 //   jsonp: {

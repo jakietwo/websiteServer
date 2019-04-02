@@ -1,29 +1,47 @@
 'use strict' ;
-const fs = require('fs')
-const path = require('path')
-const jwt = require('egg-jwt')
+
+
 
 module.exports = (options , app) => {
     return async function userInterceptor(ctx , next) {
         let authToken = ctx.header.authorization // 获取header 里面的token
+        console.log('token', authToken)
         if(authToken){
             authToken = authToken.substring(7)
             const res = verifyToken(authToken)
-            if(res.corpid && res.userid){
-                const redis_token = await app.redis.get('loginToken').get(res.corpid + res.userid)
+            if(res.username && res.id){
+                const redis_token = await app.redis.get('loginToken').get(res.id + res.username)
                 if(authToken === redis_token){
-                    ctx.locals,corpid = res.corpid
-                    ctx.locals.userid = res.userid
+                    ctx.locals.username = res.username
+                    ctx.locals.id = res.id
                     await next()
                 } else {
+                    ctx.status = 400
                     ctx.body = {code: 50012, msg: "你的账号已在其他地方登录"}
-
                 }
             }else {
+                ctx.status = 400
                 ctx.body = {code: 50012, msg: '登录状态已过期'}
             }
         }else {
-            ctx.body = { code: 50008, msg: '清登录后再进行操作'}
+            ctx.status = 400
+            ctx.body = { code: 50008, msg: '请登录后再进行操作'}
         }
     }
+}
+
+// 验证token的方法
+function verifyToken(token){
+    let res = ''
+    try {
+        let result = app.jwt.verify(token, 'jakietwo')
+        let {exp} = result 
+        let currentTime = Math.floor(Date.now()/1000)
+        if (currentTime <= exp){
+            res = result.data || {}
+        }
+    } catch (e){
+        console.log('验证失败', e)
+    }
+    return res ;
 }
