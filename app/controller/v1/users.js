@@ -51,5 +51,6 @@ class UserController extends Controller {
     ctx.response.body = user
     ctx.status = 201
   }
+ 
 }
 module.exports = UserController

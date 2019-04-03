@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1553174428522_3552';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['checkToken'];
 
   // 配置sequelize
   config.sequelize = {
@@ -40,6 +40,15 @@ module.exports = appInfo => {
   const userConfig = {
     // myAppName: 'egg',
   };
+  // 配置 csrf 
+  config.security = {
+    csrf: {
+      enable: false
+    }
+  }
+  config.checkToken = {
+    ignore: ['/login', '/sign']
+  }
   return {
     ...config,
     ...userConfig,
@@ -49,10 +58,7 @@ module.exports = appInfo => {
 exports.jwt = {
   secret: "jakietwo"
 }
-exports.middleware = ['userInterceptor']
-exports.userInterceptor = {
-  exclude: ['login', 'signup']
-}
+
 // module.exports = {
 //   jsonp: {
 //     csrf: true

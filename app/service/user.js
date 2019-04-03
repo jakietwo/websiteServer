@@ -9,7 +9,6 @@ class User extends Service {
   }
   async list () {
     const ctx = this.ctx
-    console.log('model',ctx.model)
     return ctx.model.User.findAll()
   }
   async show (id) {
