@@ -46,6 +46,9 @@ module.exports = appInfo => {
       enable: false
     }
   }
+  config.jwt = {
+    secret: 'jakietwo'
+  }
   config.checkToken = {
     ignore: ['/login', '/sign']
   }
@@ -55,9 +58,7 @@ module.exports = appInfo => {
 
   };
 };
-exports.jwt = {
-  secret: "jakietwo"
-}
+
 
 // module.exports = {
 //   jsonp: {

@@ -5,15 +5,14 @@
 module.exports = (options , app) => {
     return async function checkToken(ctx , next) {
         let authToken = ctx.header.authorization // 获取header 里面的token
-        console.log('token=================', authToken)
         if(authToken){
             authToken = authToken.substring(7)
-            const res = verifyToken(authToken)
-            if(res.username && res.id){
-                const redis_token = await app.redis.get('loginToken').get(res.id + res.username)
+            const res = verifyToken( app,authToken)
+            if(res.username){
+                const redis_token = await app.redis.get(res.username)
+               console.log('redis_token', redis_token)
                 if(authToken === redis_token){
                     ctx.locals.username = res.username
-                    ctx.locals.id = res.id
                     await next()
                 } else {
                     ctx.status = 400
@@ -31,14 +30,14 @@ module.exports = (options , app) => {
 }
 
 // 验证token的方法
-function verifyToken(token){
+function verifyToken(app,token){
     let res = ''
     try {
-        let result = app.jwt.verify(token, 'jakietwo')
+        let result = app.jwt.verify(token, 'jakietwo', {algorithm: 'HS256'})
         let {exp} = result 
         let currentTime = Math.floor(Date.now()/1000)
         if (currentTime <= exp){
-            res = result.data || {}
+            res = result || {}
         }
     } catch (e){
         console.log('验证失败', e)
