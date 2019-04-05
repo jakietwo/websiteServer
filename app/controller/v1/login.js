@@ -29,8 +29,6 @@ class loginController extends Controller {
                 message: '用户名或者密码错误!'
             }
         }
-     
-       
     }
 }
 module.exports = loginController

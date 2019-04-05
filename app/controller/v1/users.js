@@ -16,9 +16,10 @@ class UserController extends Controller {
   }
   async create() {
     const ctx = this.ctx
+    let isAdmin
     const {username , password ,auth } = ctx.request.body
-    const createTime = new Date()
-    const user =  await ctx.service.user.create({username,password, createTime, auth})
+    isAdmin = auth? auth:0 
+    const user =  await ctx.service.user.create({username,password, isAdmin})
     ctx.status = 201 ;
     ctx.body = user
   }

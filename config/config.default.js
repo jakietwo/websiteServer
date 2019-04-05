@@ -50,7 +50,7 @@ module.exports = appInfo => {
     secret: 'jakietwo'
   }
   config.checkToken = {
-    ignore: ['/login', '/sign']
+    ignore: ['/api/v1/users/login', '/api/v1/users/sign']
   }
   return {
     ...config,
