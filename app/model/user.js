@@ -4,9 +4,8 @@ module.exports = app => {
     const {STRING, INTEGER, DATE} = app.Sequelize ; 
     const User = app.model.define('users', {
         id: {
-            type: INTEGER,
-            primaryKey: true,
-            autoIncrement: true,      
+            type: STRING,
+            primaryKey: true,     
         },
         username: STRING(45), 
         password: STRING(255),

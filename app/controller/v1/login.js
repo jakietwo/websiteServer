@@ -7,11 +7,11 @@ class loginController extends Controller {
         if (!username || !password) {
             ctx.response.body = { success: false, message: '参数不合法' }
             ctx.status = 400
-            return
+            return  
         }
         const user = await ctx.service.login.login({ username, password })
         // 找到用户 生成token
-        if(user.id) {
+        if( user && user.id) {
             const token = this.app.jwt.sign({
                 username: user.username,
                 id: user.id,

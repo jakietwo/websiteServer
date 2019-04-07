@@ -20,6 +20,9 @@ class User extends Service {
     const ctx = this.ctx
     return ctx.model.User.delete(id)
   }
+  async update (id, data) {
+    
+  }
   // 创建用户
   async create(obj) {
     const ctx = this.ctx

@@ -26,7 +26,6 @@ class UserController extends Controller {
   async index() {
     const ctx = this.ctx
     const users = await ctx.service.user.list()
-    console.log(users)
     ctx.response.body =  users
     ctx.status = 201
   }
@@ -41,7 +40,7 @@ class UserController extends Controller {
     const ctx = this.ctx
     const {id} = ctx.request.body
     const data = ctx.request.body
-    const user = await ctx.service.user.edit(id, data)
+    const user = await ctx.service.user.update(id, data)
     ctx.response.body = user
     ctx.status = 201
   }
