@@ -10,8 +10,10 @@ module.exports = app => {
         username: STRING(45), 
         password: STRING(255),
         auth: INTEGER,
-        created_at: DATE,
-        updated_at: DATE
+        createTime: DATE,
+        updateTime: DATE
+    },{
+        timestamps: false, // 取消sequelize 自动添加created_at 实属恶心
     })
     return User;
 }

@@ -12,6 +12,8 @@ module.exports = app => {
         commentId: STRING,
         articled: STRING,
         userId: STRING
+    },{
+        timestamps: false, // 取消sequelize 自动添加created_at 实属恶心
     })
     return Reply
 }

@@ -11,6 +11,8 @@ module.exports = app => {
         content: TEXT,
         createTime: DATE,
         updateTime: DATE
+    },{
+        timestamps: false, // 取消sequelize 自动添加created_at 实属恶心
     })
     return Article ;
 }

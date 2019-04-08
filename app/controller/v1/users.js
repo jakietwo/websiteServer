@@ -23,33 +23,62 @@ class UserController extends Controller {
     ctx.status = 201 ;
     ctx.body = user
   }
-  async index() {
+  async index() { 
     const ctx = this.ctx
     const users = await ctx.service.user.list()
+  
+    // 将密码也拉下来了 
+    // 将密码去掉
+
     ctx.response.body =  users
-    ctx.status = 201
+    ctx.status = 200
   }
   async show() {
     const ctx = this.ctx
     const {id} = ctx.params
     const user = await ctx.service.user.show(id)
     ctx.response.body = user
-    ctx.status = 201
+    ctx.status = 200
   }
   async update() {
     const ctx = this.ctx
-    const {id} = ctx.request.body
+    const {id} = ctx.params
     const data = ctx.request.body
     const user = await ctx.service.user.update(id, data)
-    ctx.response.body = user
-    ctx.status = 201
+    // 成功返回的数据是[1] 错误返回的数据是[0]
+    if(user.length && user[0]){
+      ctx.response.body = {
+        success: true,
+        msg: '更新成功!'
+      }
+      ctx.status = 200
+    }else {
+      ctx.response.body = {
+        success: false,
+        msg: '更新失败!'
+      }
+      ctx.status = 400
+    }
   }
-  async destory() {
+  async destroy() {
     const ctx = this.ctx
-    const {id} = ctx.request.body
-    const user = await ctx.service.user.destory(id)
-    ctx.response.body = user
-    ctx.status = 201
+    const id = ctx.request.url.split('/')[4]
+    const user = await ctx.service.user.destroy(id)
+    // 返回的user 成功竟然是1 不成功则是0
+    if(user){
+      ctx.response.body = {
+        success: true,
+        msg: '删除成功'
+      }
+      ctx.status = 201
+    }else{
+      ctx.response.body = {
+        success: false,
+        msg: '删除不成功!'
+      }
+      ctx.status = 400
+    }
+    
   }
  
 }

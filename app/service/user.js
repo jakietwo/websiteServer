@@ -10,18 +10,28 @@ class User extends Service {
   }
   async list () {
     const ctx = this.ctx
-    return ctx.model.User.findAll()
+    return await ctx.model.User.findAll({
+      attributes: ['id', 'username', 'auth','createTime', 'updateTime']
+    })
   }
   async show (id) {
     const ctx = this.ctx
-    return ctx.model.User.findOne(id)
+    return await ctx.model.User.findByPk(id ,{
+      attributes: ['id','username', 'auth', 'createTime', 'updateTime']
+    })
   }
-  async destory(id) {
+  async destroy(id) {
     const ctx = this.ctx
-    return ctx.model.User.delete(id)
+    return await ctx.model.User.destroy({
+      where: {
+        id: id
+      }
+    })
+  
   }
   async update (id, data) {
-    
+    const ctx = this.ctx
+    return await ctx.model.User.update(data, {where:{id}})
   }
   // 创建用户
   async create(obj) {
@@ -40,10 +50,10 @@ class User extends Service {
     }
    
     const id = uuidv1()
-    const created_at = dayjs().toISOString()
+    const createTime = dayjs().toISOString()
     const {username, password, isAdmin} = obj
     let auth = isAdmin
-    let result = await ctx.model.User.create({id, username, password, auth ,created_at})
+    let result = await ctx.model.User.create({id, username, password, auth ,createTime})
     return result.id
 
   }
