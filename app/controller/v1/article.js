@@ -4,23 +4,74 @@ const Controller = require('egg').Controller;
 class articleController extends Controller {
     // list all article
     async index () {
-        
+        const ctx = this.ctx
+        const article = await ctx.service.article.index()
+        ctx.response.body = article
+        ctx.status = 200
     }
     
     async show() {
-
+        const ctx = this.ctx
+        const {id} = ctx.params
+        const article = await ctx.service.article.show(id)
+        ctx.response.body = article
+        ctx.status = 200
     }
     
     async create() {
-
+        const ctx = this.ctx
+        const {title, content} = ctx.request.body
+        if(!title || !content){
+            ctx.response.body = {
+                success: false,
+                msg: '参数不合法!'
+            }
+            return
+        }
+        const article = await ctx.service.article.create({title, content})
+        ctx.status = 201 
+        ctx.body = article
     }
 
     async update() {
-
+        const ctx = this.ctx
+        const {id} = ctx.params
+        const data = ctx.request.body
+        const article = await ctx.service.article.update(id, data)
+        // 成功返回的数据是[1] 否则是[0]
+        if(article.length && article[0]){
+            ctx.response.body = {
+                success: true,
+                msg: '更新成功!'
+            }
+            ctx.status = 200
+        }else {
+            ctx.response.body = {
+                success: false,
+                msg: '更新失败'
+            }
+            ctx.status = 400
+        }
     }
     
     async destory() {
-
+        const ctx = this.ctx
+        const {id} = ctx.request.params
+        const article = await ctx.service.article.destroy(id)
+        // 返回article 成功竟然是1 不成功则是0
+        if(article) {
+            ctx.response.body = {
+                success: true,
+                msg: '删除成功!'
+            }
+            ctx.status = 200
+        } else {
+            ctx.response.body = {
+                success: false,
+                msg: '删除失败'
+            }
+            ctx.status = 400
+        }
     }
 }
 module.exports = articleController

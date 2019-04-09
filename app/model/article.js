@@ -2,7 +2,7 @@
 
 module.exports = app => {
     const {STRING ,INTEGER, DATE ,TEXT } = app.Sequelize ;
-    const Article = app.model.define('artcile', {
+    const Article = app.model.define('article', {
         id: {
             type: STRING,
             primaryKey: true,     
