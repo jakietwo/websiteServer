@@ -23,3 +23,4 @@ class articleController extends Controller {
 
     }
 }
+module.exports = articleController

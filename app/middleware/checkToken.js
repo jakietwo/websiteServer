@@ -40,7 +40,7 @@ function verifyToken(app,token){
             res = result || {}
         }
     } catch (e){
-        console.log('验证失败', e)
+        console.log('验证失败')
     }
     return res ;
 }
