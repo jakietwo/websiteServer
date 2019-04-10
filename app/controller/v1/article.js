@@ -35,6 +35,7 @@ class articleController extends Controller {
 
     async update() {
         const ctx = this.ctx
+    
         const {id} = ctx.params
         const data = ctx.request.body
         const article = await ctx.service.article.update(id, data)
@@ -54,9 +55,9 @@ class articleController extends Controller {
         }
     }
     
-    async destory() {
+    async destroy() {
         const ctx = this.ctx
-        const {id} = ctx.request.params
+        const {id} = ctx.params
         const article = await ctx.service.article.destroy(id)
         // 返回article 成功竟然是1 不成功则是0
         if(article) {

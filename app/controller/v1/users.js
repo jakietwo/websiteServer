@@ -19,6 +19,14 @@ class UserController extends Controller {
     let isAdmin
     const {username , password ,auth } = ctx.request.body
     isAdmin = auth? auth:0 
+    if(!username || !password){
+      ctx.response.body = {
+        success: false,
+        msg: '参数不合法!'
+      }
+      ctx.status = 400
+      return 
+    }
     const user =  await ctx.service.user.create({username,password, isAdmin})
     ctx.status = 201 ;
     ctx.body = user

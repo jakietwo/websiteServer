@@ -15,5 +15,5 @@ module.exports = app => {
   app.router.resources('comment', '/api/v1/coments', app.controller.v1.comment)
   app.router.resources('reply', '/api/v1/replys', app.controller.v1.reply)
   app.router.resources('tag', '/api/v1/tags', app.controller.v1.tag)
-  app.router.resources('users', '/api/v1/users', app.controller.v1.users)
+  app.router.resources('category', '/api/v1/categorys', app.controller.v1.category)
 };
