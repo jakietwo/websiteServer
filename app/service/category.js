@@ -36,7 +36,7 @@ class Category extends Service {
     }
     async create(obj){
         const ctx = this.ctx
-        const {name, articleId} = ctx.request.body
+        const {name, articleId} = obj
         // 先判断articleId 是否存在
         const article = await ctx.model.Article.findByPk(articleId)
         if(!article){
@@ -45,7 +45,7 @@ class Category extends Service {
                 msg: 'articleId不存在'
             }
         }
-        const cid = uuidv1()
+        const id = uuidv1()
         const category = await ctx.model.Category.create({ name,id, articleId})
         console.log('category====' ,category)
         return category.id

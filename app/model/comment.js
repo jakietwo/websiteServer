@@ -10,8 +10,7 @@ module.exports = app => {
         content: TEXT,
         createTime: DATE,
         updateTime: DATE,
-        userId: STRING,
-        commentcol: STRING
+        userId: STRING
     },{
         timestamps: false, // 取消sequelize 自动添加created_at 实属恶心
     })
