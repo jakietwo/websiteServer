@@ -31,7 +31,8 @@ class User extends Service {
   }
   async update (id, data) {
     const ctx = this.ctx
-    return await ctx.model.User.update(data, {where:{id}})
+    const updateTime = dayjs().toISOString()
+    return await ctx.model.User.update({data,updateTime}, {where:{id}})
   }
   // 创建用户
   async create(obj) {

@@ -19,7 +19,8 @@ class Comment extends Service {
     }
     async update(id, data) {
         const ctx = this.ctx
-        return await ctx.model.Comment.update(data, {
+        const updateTime = dayjs().toISOString()
+        return await ctx.model.Comment.update({data,updateTime}, {
             where: {
                 id
             }

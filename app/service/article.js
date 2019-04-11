@@ -15,7 +15,8 @@ class Article extends Service{
     }
     async update(id, data) {
         const ctx = this.ctx
-        return await ctx.model.Article.update(data, {
+        const updateTime = dayjs().toISOString()
+        return await ctx.model.Article.update({data,updateTime}, {
             where: {
                 id
             }
