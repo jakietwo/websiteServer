@@ -12,7 +12,7 @@ class Category extends Service {
     // id是articleId
     async show(id) {
         const ctx = this.ctx
-        return await ctx.model.Category.findOne({
+        return await ctx.model.Category.findAll({
             where: {
                 articleId: id
             }
