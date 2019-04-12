@@ -12,6 +12,8 @@ class tagController extends Controller{
     async show() {
         const ctx = this.ctx
         const {id} = ctx.params
+        const key = ctx.request.body.key
+        console.log('key', key)
         if(!id){
             ctx.response.body = {
                 success: false,
