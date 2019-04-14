@@ -11,7 +11,7 @@ class Comment extends Service {
     }
     async show(id) {
         const ctx = this.ctx
-        return await ctx.model.Comment.findOne({
+        return await ctx.model.Comment.findAll({
             where: {
                 articleId: id
             }
@@ -46,6 +46,16 @@ class Comment extends Service {
             return { success: false, msg: '创建不成功!' }
         }
 
+    }
+    // 动态获取key
+    async getCommentByID( articleId) {
+        const ctx = this.ctx
+        const comment = await ctx.model.Comment.findAll({
+            where: {
+                  articleId
+            }
+        })
+        return comment
     }
 }
 module.exports = Comment

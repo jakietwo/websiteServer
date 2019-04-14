@@ -1,51 +1,55 @@
 'use strict';
 const Controller = require('egg').Controller;
-
-class commentController extends Controller{
-    async index () {
+// 动态路由ID白名单
+const IdWhiteList = {
+    'articleId': 1,
+    'userTd': 1
+}
+class commentController extends Controller {
+    async index() {
         const ctx = this.ctx
         const comment = await ctx.service.comment.index()
         ctx.response.body = comment
         ctx.status = 200
     }
-    
+
     async show() {
         const ctx = this.ctx
         // id 是articleId
-        const {id} = ctx.params
+        const { id } = ctx.params
         const comment = await ctx.service.comment.show(id)
         ctx.response.body = comment
         ctx.status = 200
-     }
-    
+    }
+
     async create() {
         const ctx = this.ctx
-        const {articleId, content, userId} = ctx.request.body
-        if(!articleId || !content || !userId){
+        const { articleId, content, userId } = ctx.request.body
+        if (!articleId || !content || !userId) {
             ctx.response.body = {
                 success: false,
                 msg: '参数不合法!'
             }
-            ctx.status = 400 
-            return 
+            ctx.status = 400
+            return
         }
-        const comment = await ctx.service.comment.create({articleId,content, userId})
+        const comment = await ctx.service.comment.create({ articleId, content, userId })
         ctx.response.body = comment
         ctx.status = 201
     }
 
     async update() {
         const ctx = this.ctx
-        const {id} = ctx.params
+        const { id } = ctx.params
         const data = ctx.request.body
         const comment = await ctx.service.comment.update(id, data)
-        if(Array.isArray(comment) && comment[0]){
+        if (Array.isArray(comment) && comment[0]) {
             ctx.response.body = {
                 success: true,
                 msg: '更新成功!'
             }
             ctx.status = 200
-        }else {
+        } else {
             ctx.response.body = {
                 success: false,
                 msg: '更新失败!'
@@ -53,25 +57,42 @@ class commentController extends Controller{
             ctx.status = 400
         }
     }
-    
+
     async destroy() {
         const ctx = this.ctx
-        const {id} = ctx.params
+        const { id } = ctx.params
         const comment = await ctx.service.comment.destroy(id)
         // 返回成功为1 
-        if(comment) {
+        if (comment) {
             ctx.response.body = {
                 success: true,
                 msg: '删除成功!'
             }
             ctx.status = 200
-        }else {
+        } else {
             ctx.response.body = {
                 success: false,
                 msg: '删除失败!'
             }
             ctx.status = 400
         }
+    }
+
+    // 动态获取信息Byid
+    async getById() {
+        const ctx = this.ctx
+        const {articleId } = ctx.request.body
+        if(!articleId) {
+            ctx.response.body = {
+                success:false,
+                msg: '参数不合法!'
+            }
+            ctx.status = 400 
+            return 
+        }
+        const comment = await ctx.service.comment.getCommentByID(articleId)
+        ctx.response.body = comment
+        ctx.status = 200
     }
 }
 
