@@ -57,5 +57,14 @@ class Comment extends Service {
         })
         return comment
     }
+    async getCommentByUserId(userId){
+        const ctx = this.ctx
+        const comment = await ctx.model.Comment.findAll({
+            where: {
+                userId
+            }
+        })
+        return comment
+    }
 }
 module.exports = Comment

@@ -78,7 +78,7 @@ class commentController extends Controller {
         }
     }
 
-    // 动态获取信息Byid
+    // 动态获取信息ByArticleId
     async getById() {
         const ctx = this.ctx
         const {articleId } = ctx.request.body
@@ -91,6 +91,22 @@ class commentController extends Controller {
             return 
         }
         const comment = await ctx.service.comment.getCommentByID(articleId)
+        ctx.response.body = comment
+        ctx.status = 200
+    }
+    // 动态获取信息byuserId
+    async getByUserId() {
+        const ctx = this.ctx
+        const {userId} = ctx.request.body
+        if(!userId) {
+            ctx.response.body = {
+                success: false,
+                msg: '参数不合法!'
+            }
+            ctx.status = 400 
+            return
+        }
+        const comment = await ctx.service.comment.getCommentByUserId(userId)
         ctx.response.body = comment
         ctx.status = 200
     }
