@@ -86,7 +86,21 @@ class replyController extends Controller {
     }
 
     // 其他方法比如查找通过userId查找 或者是其他查找方法
-
+    async getByUserId() {
+        const ctx = this.ctx
+        const {userId} = ctx.request.body
+        if(!userId) {
+            ctx.response.body = {
+                success:false,
+                msg: '参数不合法!'
+            }
+            ctx.status = 400
+            return 
+        }
+        const reply = await ctx.service.reply.getByUserId(userId)
+        ctx.response.body = reply
+        ctx.status = 200
+    }
 }
 
 module.exports = replyController

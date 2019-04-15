@@ -61,6 +61,15 @@ class Reply extends Service{
         })
         return reply.id
     }
+    // 通过userId 获取reply
+    async getByUserId(userId) {
+        const ctx = this.ctx
+        return await ctx.model.Reply.findAll({
+            where: {
+                userId
+            }
+        })
+    }
 }
 
 module.exports = Reply

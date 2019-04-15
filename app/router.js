@@ -18,5 +18,6 @@ module.exports = app => {
   app.router.resources('category', '/api/v1/categorys', app.controller.v1.category)
   router.post('/api/v1/getCommentsByArtId', controller.v1.comment.getById)
   router.post('/api/v1/getCommentsByUid', controller.v1.comment.getByUserId)
-  
+
+  router.post('/api/v1/getReplyByUserId', controller.v1.reply.getByUserId)
 };
