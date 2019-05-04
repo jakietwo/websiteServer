@@ -27,7 +27,7 @@ module.exports = appInfo => {
     username: 'root',
     password: 'wjg19940802.',
     timezone: '+08:00'
-  }
+  };
   config.redis = {
     client: {
       port: 6379,
@@ -35,30 +35,33 @@ module.exports = appInfo => {
       password: 'jakietwo',
       db: 0
     }
-  }
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
   };
-  // 配置 csrf 
+  // 配置 csrf
   config.security = {
     csrf: {
       enable: false
     }
-  }
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  };
   config.jwt = {
     secret: 'jakietwo'
-  }
+  };
   config.checkToken = {
-    ignore: ['/api/v1/users/login', '/api/v1/users/sign']
-  }
+    ignore: ['/api/v1/users/login', '/api/v1/users/sign', '/api/v1/articles', '/api/v1/comments', '/api/v1/replys', '/api/v1/tags']
+    // include: ['']
+  };
   return {
     ...config,
-    ...userConfig,
-
+    ...userConfig
   };
 };
-
 
 // module.exports = {
 //   jsonp: {

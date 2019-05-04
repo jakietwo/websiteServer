@@ -1,27 +1,26 @@
 'use strict';
 
 module.exports = (options, app) => {
-  return async function checkToken(ctx, next) {
+  return async function checkToken(ctx) {
     let authToken = ctx.header.authorization; // 获取header 里面的token
     if (authToken) {
       authToken = authToken.substring(7);
       const res = verifyToken(app, authToken);
       if (res.username) {
         const redis_token = await app.redis.get(res.username);
-    
         if (authToken === redis_token) {
-          await next();
+          return { code: 50000, success: true, message: '验证成功!' };
         } else {
           ctx.status = 400;
-          ctx.body = { code: 50012, suceess: false, message: '你的账号已在其他地方登录' };
+          return { code: 50012, success: false, message: '你的账号已在其他地方登录' };
         }
       } else {
         ctx.status = 400;
-        ctx.body = { code: 50010, suceess: false, message: '登录状态已过期' };
+        return { code: 50010, success: false, message: '登录状态已过期' };
       }
     } else {
       ctx.status = 400;
-      ctx.body = { code: 50008, suceess: false, message: '请登录后再进行操作' };
+      return { code: 50008, success: false, message: '请登录后再进行操作' };
     }
   };
 };

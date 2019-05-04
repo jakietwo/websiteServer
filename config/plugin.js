@@ -22,20 +22,24 @@ exports.mysql = {
 };
 exports.sequelize = {
   enable: true,
-  package: 'egg-sequelize',
+  package: 'egg-sequelize'
 };
 exports.validate = {
   enable: true,
   package: 'egg-validate'
-}
+};
 exports.jwt = {
   enable: true,
-  package: 'egg-jwt',
-}
+  package: 'egg-jwt'
+};
 exports.redis = {
   enable: true,
   package: 'egg-redis'
-}
+};
+exports.cors = {
+  enable: true,
+  package: 'egg-cors'
+};
 // exports.security = {
 //   enable: false
 // }
