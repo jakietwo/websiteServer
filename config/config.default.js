@@ -54,7 +54,7 @@ module.exports = appInfo => {
     secret: 'jakietwo'
   };
   config.checkToken = {
-    ignore: ['/api/v1/users/login', '/api/v1/users/sign', '/api/v1/articles', '/api/v1/comments', '/api/v1/replys', '/api/v1/tags', '/api/v1/users']
+    ignore: ['/api/v1/users/login', '/api/v1/users/sign', '/api/v1/articles', '/api/v1/comments', '/api/v1/replys', '/api/v1/tags', '/api/v1/users', '/api/v1/categorys']
     // include: ['']
   };
   return {

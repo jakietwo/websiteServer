@@ -11,14 +11,14 @@ class categoryController extends Controller {
   // 根据articleId 来找对应的category
   async show() {
     const ctx = this.ctx;
-    // 验证是否具有权限
-    let MyCheckToken = this.app.middleware.mycheckToken('', this.app);
-    let res = await MyCheckToken(ctx);
-    if (!res.success) {
-      ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
-      return;
-    }
-    // END
+    // // 验证是否具有权限
+    // let MyCheckToken = this.app.middleware.mycheckToken('', this.app);
+    // let res = await MyCheckToken(ctx);
+    // if (!res.success) {
+    //   ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
+    //   return;
+    // }
+    // // END
     const { id } = ctx.params;
     const category = await ctx.service.category.show(id);
     ctx.response.body = category;
