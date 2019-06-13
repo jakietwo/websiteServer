@@ -45,7 +45,11 @@ class categoryController extends Controller {
       return;
     }
     const categoty = await ctx.service.category.create({ name, articleId });
-    ctx.body = categoty;
+    ctx.body = {
+      success: true,
+      categotyId: categoty,
+      msg: '添加分类成功!'
+    };
     ctx.status = 201;
   }
 

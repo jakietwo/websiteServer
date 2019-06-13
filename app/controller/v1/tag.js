@@ -55,7 +55,11 @@ class tagController extends Controller {
       return;
     }
     const tag = await ctx.service.tag.create({ name, articleId });
-    ctx.body = tag;
+    ctx.body = {
+      success: true,
+      tagId: tag,
+      message: '新增标签成功!'
+    };
     ctx.status = 201;
   }
 

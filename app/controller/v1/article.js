@@ -44,7 +44,11 @@ class articleController extends Controller {
     }
     const article = await ctx.service.article.create({ title, content });
     ctx.status = 201;
-    ctx.body = article;
+    ctx.body = {
+      success: true,
+      articleId: article,
+      message: '添加文章成功!'
+    };
   }
 
   async update() {

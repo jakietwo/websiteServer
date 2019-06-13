@@ -37,6 +37,7 @@ class commentController extends Controller {
     let res = await MyCheckToken(ctx);
     if (!res.success) {
       ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
+      ctx.status = 200;
       return;
     }
     // END

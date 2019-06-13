@@ -16,14 +16,14 @@ class UserController extends Controller {
   }
   async create() {
     const ctx = this.ctx;
-    // 验证是否具有权限
-    let MyCheckToken = this.app.middleware.mycheckToken('', this.app);
-    let res = await MyCheckToken(ctx);
-    if (!res.success) {
-      ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
-      return;
-    }
-    // 上节代码
+    // // 验证是否具有权限
+    // let MyCheckToken = this.app.middleware.mycheckToken('', this.app);
+    // let res = await MyCheckToken(ctx);
+    // if (!res.success) {
+    //   ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
+    //   return;
+    // }
+    // // 上节代码
     let isAdmin;
     const { username, password, auth } = ctx.request.body;
     isAdmin = auth ? auth : 0;
@@ -41,14 +41,14 @@ class UserController extends Controller {
   }
   async index() {
     const ctx = this.ctx;
-    // 验证是否具有权限
-    let MyCheckToken = this.app.middleware.mycheckToken('', this.app);
-    let res = await MyCheckToken(ctx);
-    if (!res.success) {
-      ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
-      return;
-    }
-    // 上节代码
+    // // 验证是否具有权限
+    // let MyCheckToken = this.app.middleware.mycheckToken('', this.app);
+    // let res = await MyCheckToken(ctx);
+    // if (!res.success) {
+    //   ctx.body = { code: 400, success: false, msg: '验证失败!,请登录!' };
+    //   return;
+    // }
+    // // 上节代码
     const users = await ctx.service.user.list();
 
     // 将密码也拉下来了
