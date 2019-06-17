@@ -20,7 +20,6 @@ class Category extends Service {
     }
     async update(id, data) {
         const ctx = this.ctx
-        
         return await ctx.model.Category.update(data, {
             where: {
                 id

@@ -77,20 +77,21 @@ class UserController extends Controller {
     const { id } = ctx.params;
     const data = ctx.request.body;
     const user = await ctx.service.user.update(id, data);
+    ctx.response.body = user;
     // 成功返回的数据是[1] 错误返回的数据是[0]
-    if (user.length && user[0]) {
-      ctx.response.body = {
-        success: true,
-        msg: '更新成功!'
-      };
-      ctx.status = 200;
-    } else {
-      ctx.response.body = {
-        success: false,
-        msg: '更新失败!'
-      };
-      ctx.status = 400;
-    }
+    // if (user.length && user[0]) {
+    //   ctx.response.body = {
+    //     success: true,
+    //     msg: '更新成功!'
+    //   };
+    //   ctx.status = 200;
+    // } else {
+    //   ctx.response.body = {
+    //     success: false,
+    //     msg: '更新失败!'
+    //   };
+    //   ctx.status = 400;
+    // }
   }
   async destroy() {
     const ctx = this.ctx;

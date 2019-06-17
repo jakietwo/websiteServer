@@ -62,20 +62,21 @@ class articleController extends Controller {
     const { id } = ctx.params;
     const data = ctx.request.body;
     const article = await ctx.service.article.update(id, data);
+    ctx.body = article;
     // 成功返回的数据是[1] 否则是[0]
-    if (article.length && article[0]) {
-      ctx.response.body = {
-        success: true,
-        msg: '更新成功!'
-      };
-      ctx.status = 200;
-    } else {
-      ctx.response.body = {
-        success: false,
-        msg: '更新失败'
-      };
-      ctx.status = 400;
-    }
+    // if (article.length && article[0]) {
+    //   ctx.response.body = {
+    //     success: true,
+    //     msg: '更新成功!'
+    //   };
+    //   ctx.status = 200;
+    // } else {
+    //   ctx.response.body = {
+    //     success: false,
+    //     msg: '更新失败'
+    //   };
+    //   ctx.status = 400;
+    // }
   }
 
   async destroy() {

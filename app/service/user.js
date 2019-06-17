@@ -31,7 +31,22 @@ class User extends Service {
   async update(id, data) {
     const ctx = this.ctx;
     const updateTime = dayjs().toISOString();
-    return await ctx.model.User.update({ data, updateTime }, { where: { id } });
+    const user = await ctx.model.User.findByPk(id);
+    const data1 = Object.assign(data, { updateTime });
+    if (!user) {
+      ctx.status = 200;
+      ctx.response.body = {
+        success: false,
+        msg: '更新失败,没有找到userId'
+      };
+      return;
+    }
+    const res = await user.update(data1);
+    ctx.status = 200;
+    return {
+      success: true,
+      msg: '更新成功！'
+    };
   }
   // 创建用户
   async create(obj) {
