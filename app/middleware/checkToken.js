@@ -27,6 +27,13 @@ module.exports = (options, app) => {
 };
 
 // 验证token的方法
+/**
+ * @param  {} app
+ * @param  {} token
+ * @param  {} {letres='';try{letresult=app.jwt.verify(token
+ * @param  {} 'jakietwo'
+ * @param  {'HS256'}} {algorithm
+ */
 function verifyToken(app, token) {
   let res = '';
   try {

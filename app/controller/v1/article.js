@@ -50,7 +50,17 @@ class articleController extends Controller {
       message: '添加文章成功!'
     };
   }
-
+  /**
+   * @param  {} {constctx=this.ctx;letMyCheckToken=this.app.middleware.mycheckToken(''
+   * @param  {} this.app
+   * @param  {} ;letres=awaitMyCheckToken(ctx
+   * @param  {} ;if(!res.success
+   * @param  {400} {ctx.body={code
+   * @param  {false} success
+   * @param  {'验证失败!} msg
+   * @param  {} 请登录!'};return;}const{id}=ctx.params;constdata=ctx.request.body;constarticle=awaitctx.service.article.update(id
+   * @param  {} data
+   */
   async update() {
     const ctx = this.ctx;
     let MyCheckToken = this.app.middleware.mycheckToken('', this.app);

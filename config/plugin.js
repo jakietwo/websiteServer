@@ -14,7 +14,7 @@ exports.mysql = {
     host: '127.0.0.1',
     port: '3306',
     user: 'root',
-    password: 'wjg19940802.',
+    password: 'Wjg19940802.',
     database: 'mywebsite'
   },
   app: true,
